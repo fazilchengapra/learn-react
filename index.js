@@ -1,13 +1,31 @@
 import React from "react";
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 
-const h1 = React.createElement('div', { id: 'parant' }, [
-    React.createElement('div', { id: 'chaild1' },
-        [React.createElement('h1', {}, 'I am a h1 tag'), React.createElement('h2', {}, 'I am a h2 tag')]),
-    React.createElement('div', { id: 'chaild2' },
-        [React.createElement('h1', {}, 'I am a h1 tag'), React.createElement('h2', {}, 'I am a h2 tag')])
-]);
+// this jsx element convert to => react element
+// who is convert to react this job is taken by babel
+const JSX = (
+  <h1 className="head" id="heading">
+    Hello from jsx
+  </h1>
+);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// react component
 
-root.render(h1);
+const Chaild = () => (
+  <div className="chaild">
+    <h1>hello jsx</h1>
+  </div>
+);
+
+//this is react component
+//component composition
+const HeadComponent = () => (
+  <div className="conatiner">
+    <Chaild />
+    <h1 id="heading">Hello loacl from component</h1>
+  </div>
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<HeadComponent />);
