@@ -2,8 +2,12 @@ import Card from "./Card";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useIsOnline from "../../util/useIsOnline";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+
+  const cart = useSelector((store) => store.cart.items)
+  
 
   const isOnline = useIsOnline()
   const [logBtn, setLogBtn] = useState("Login");
@@ -17,7 +21,7 @@ const Header = () => {
         <ul className="flex gap-5 content-center text-md font-semibold">
           <li className="p-1">Network Status: {isOnline ? '✅' : '🔴'}</li>
           <li className="p-1"><Link to={'/'}>Home</Link></li>
-          <li className="p-1"><Link to={'about'}>About</Link></li>
+          <li className="p-1"><Link to={'/about'}>About</Link></li>
           <li className="px-6 bg-green-100 rounded-lg">
             {" "}
             <button
@@ -29,8 +33,11 @@ const Header = () => {
               {logBtn}
             </button>{" "}
           </li>
-          <li className="mr-4 px-6 bg-gray-200 rounded-lg">
-            <button className="p-1 g">Sign Up</button>
+          <li className=" px-6">
+           <Link to={'/cart'}> Cart - ({cart.length} items)</Link>
+          </li>
+          <li>
+          <li className="p-1"><Link to={'/contact'}>Contact</Link></li>
           </li>
         </ul>
       </div>

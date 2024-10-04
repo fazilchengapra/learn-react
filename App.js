@@ -1,20 +1,30 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./src/components/Header";
 import Body from "./src/components/Body";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 // import About from "./src/components/about";
 import Error from "./src/components/Error";
-import DynamicRestro from "./src/components/DynamicRestro";
 import Shimmer from "./src/Shimmer";
+import RestroInfo from "./src/components/RestroInfo";
+import UserContext from "./src/components/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./util/appStore";
+import Cart from "./src/components/Cart";
+import Contact from "./src/components/Contact";
 
 const About = lazy(() => import("./src/components/about"));
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState("Fazil");
   return (
     <>
-      <Header />
-      <Outlet />
+      <Provider store={appStore}>
+        <UserContext.Provider value={{ logginuser: userName, setUserName }}>
+          <Header />
+          <Outlet />
+        </UserContext.Provider>
+      </Provider>
     </>
   );
 };
@@ -39,7 +49,15 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/restro/:id",
-        element: <DynamicRestro />,
+        element: <RestroInfo />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

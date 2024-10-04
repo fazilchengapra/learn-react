@@ -27,6 +27,7 @@ function Body() {
 
     console.log(filterRes);
     
+    
   }, [resData]);
 
   if (isOnline === false) {
@@ -49,6 +50,7 @@ function Body() {
           Filter Rest
         </button>
         <input
+        data-testid='searchInput'
           className="border border-solid border-gray-900 pl-1 focus:outline-none rounded-md mr-1"
           type="search"
           onChange={(e) => setSearchInput(e.target.value)}
@@ -69,7 +71,7 @@ function Body() {
       </div>
       <div className="cards flex flex-wrap p-4 m-4 gap-10">
         {filterRes.map((resData, index) => (
-          <div className="w-64" key={index}>
+          <div className="w-64" data-testid='resCard' key={index}>
             <Card resData={resData} />
           </div>
         ))}

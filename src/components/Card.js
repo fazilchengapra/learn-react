@@ -1,10 +1,10 @@
 import CONSTANT from "../../util/constant";
 import { Link } from "react-router-dom";
-const Card = (props) => {
-  const { name, cuisines, deliveryTime, subHeader, cloudinaryImageId} = props?.resData?.info;
+const Card = ({resData}) => {
+  const { name, cuisines, deliveryTime, subHeader, cloudinaryImageId} = resData?.info;
   return (
     <div className="flex m-4 p-4 bg-gray-100 rounded-md hover:bg-gray-200 hover:rounded-lg cursor-pointer">
-      <Link to={'restro/'+props?.resData?.info?.id}>
+      <Link to={'restro/'+resData?.info?.id}>
         <div className="">
           <img
             className="rounded-lg"
